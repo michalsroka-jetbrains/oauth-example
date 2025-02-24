@@ -1,0 +1,5 @@
+/node_modules
+/dist
+
+# Service Account JSON key
+melodic-arcadia*.json
