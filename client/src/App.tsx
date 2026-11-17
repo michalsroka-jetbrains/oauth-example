@@ -7,7 +7,7 @@ import BigQueryButton from "./components/oauth/BigQueryButton";
 const App = () => {
 
   return (
-    <div>
+    <div className="App">
       <LoginButton />
       <BigQueryButton />
     </div>
