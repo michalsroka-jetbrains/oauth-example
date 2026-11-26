@@ -77,7 +77,7 @@ app.get('/api/bigquery/data', async (req, res) => {
 
         const accessToken = req.session.accessToken;
         const projectId = process.env.GCP_PROJECT_ID ?? '';
-        const query = 'SELECT text_col, num_col FROM `test_id.test_table_a` LIMIT 10;';
+        const query = 'SELECT text_col, num_col FROM `test_id.test_table_a` LIMIT 25;';
 
         const data = await executeBigQuery(accessToken, projectId, query);
 
@@ -101,7 +101,7 @@ app.get('/api/sa/bigquery/data', async (req, res) => {
         getPrincipalFromAccessToken(accessToken);
         
         const projectId = process.env.GCP_PROJECT_ID ?? '';
-        const query = 'SELECT text_col, num_col FROM `test_id.test_table_a` LIMIT 10;';
+        const query = 'SELECT text_col, num_col FROM `test_id.test_table_a` LIMIT 25;';
 
         const data = await executeBigQuery(accessToken, projectId, query);
 
@@ -110,6 +110,10 @@ app.get('/api/sa/bigquery/data', async (req, res) => {
         console.error('Error fetching BigQuery data:', error);
         res.status(500).send('Failed to fetch BigQuery data.');
     }
+});
+
+app.get('/api/health', (_req, res) => {
+    res.json({ status: 'ok' });
 });
 
 const port = process.env.PORT || 8000;

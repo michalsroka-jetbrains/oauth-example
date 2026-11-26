@@ -33,3 +33,9 @@ Run
 ``` bash
 npm run start
 ```
+
+## Health check
+The API answers `GET /api/health` with `{"status": "ok"}` and needs no sign-in.
+
+## Audit log
+Token events are appended to the file named by `AUDIT_LOG_PATH` (default `token-audit.jsonl`), one JSON line each.

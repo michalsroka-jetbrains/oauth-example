@@ -13,7 +13,7 @@ app.use(
   })
 );
 
-const port = 8001;
+const port = Number(process.env.PORT ?? 8001);
 
 const DATA_API_URL = 'http://localhost:8000/api/sa/bigquery/data';
 
