@@ -47,7 +47,7 @@ export async function executeBigQuery(accessToken: string, projectId: string, qu
         projectId: string,
         jobId: string
     ): Promise<void> {
-        const maxRetries = 4;
+        const maxRetries = 10;
 
         let isJobComplete = false;
         let retries = 0;
@@ -72,7 +72,7 @@ export async function executeBigQuery(accessToken: string, projectId: string, qu
             if (jobStatus?.state === 'DONE') {
                 isJobComplete = true;
             } else {
-                await new Promise((resolve) => setTimeout(resolve, 1000));
+                await new Promise((resolve) => setTimeout(resolve, 2000));
             }
             ++retries;
         }
