@@ -35,8 +35,7 @@ export function createDownscopedBigQueryClient(accessToken: string, projectId: s
 
                         // BigQuery Job User permissions
                         'bigquery.jobs.create',
-                        'bigquery.jobs.get',
-                        'bigquery.jobs.list'
+                        'bigquery.jobs.get'
                     ],
                 },
             ],
@@ -61,7 +60,7 @@ export async function refreshAccessToken(refreshToken: string): Promise<{ access
             qs.stringify({
                 client_id: CLIENT_ID,
                 client_secret: CLIENT_SECRET,
-                refreshAccess_token: refreshToken,
+                refresh_token: refreshToken,
                 grant_type: 'refresh_token',
             }),
             {
@@ -73,8 +72,19 @@ export async function refreshAccessToken(refreshToken: string): Promise<{ access
 
         return { accessToken: access_token, expiresIn: expires_in };
     } catch (error: any) {
+        if (error.response?.data?.error === 'invalid_grant') {
+            throw new RefreshTokenRevokedError();
+        }
         console.error('Error refreshing access token:', error.response?.data || error.message);
         throw error;
+    }
+}
+
+/** Thrown when Google rejects a refresh token as revoked or expired; the user must sign in again. */
+export class RefreshTokenRevokedError extends Error {
+    constructor() {
+        super('The refresh token was revoked or has expired');
+        this.name = 'RefreshTokenRevokedError';
     }
 }
 
