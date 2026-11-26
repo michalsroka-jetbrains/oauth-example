@@ -2,6 +2,8 @@ import { error } from 'console';
 import { google } from 'googleapis';
 import { createDownscopedBigQueryClient } from './tokenService';
 
+const BIGQUERY_LOCATION = process.env.BIGQUERY_LOCATION ?? 'us-east1';
+
 export async function executeBigQuery(accessToken: string, projectId: string, query: string): Promise<any> {
     const auth = new google.auth.OAuth2();
     auth.setCredentials({ access_token: accessToken });
@@ -34,7 +36,7 @@ export async function executeBigQuery(accessToken: string, projectId: string, qu
         const result = await bigQuery.jobs.getQueryResults({
             projectId,
             jobId: jobId,
-            location: 'us-east1',
+            location: BIGQUERY_LOCATION,
         });
 
         return result.data.rows;
@@ -56,7 +58,7 @@ export async function executeBigQuery(accessToken: string, projectId: string, qu
                 break;
             }
             const jobStatusResponse = await bigQuery.jobs.get({
-                location: 'us-east1',
+                location: BIGQUERY_LOCATION,
                 projectId,
                 jobId,
             });
