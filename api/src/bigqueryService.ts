@@ -29,7 +29,7 @@ export async function executeBigQuery(accessToken: string, projectId: string, qu
             throw error(`BigQuery jobId is: ${jobId}`);
         }
 
-        waitForJobCompletion(projectId, jobId);
+        await waitForJobCompletion(projectId, jobId);
 
         const result = await bigQuery.jobs.getQueryResults({
             projectId,
