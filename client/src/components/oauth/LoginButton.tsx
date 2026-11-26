@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 const GOOGLE_OAUTH2_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
 const CLIENT_ID = '66335514708-c5sg7boq7scjfqadfmmq4f6rsj87vq7a.apps.googleusercontent.com';
 const REDIRECT_URI = 'http://localhost:8000/auth/callback';
-const SCOPE = 'email https://www.googleapis.com/auth/bigquery';
+const SCOPE = 'email https://www.googleapis.com/auth/bigquery.readonly';
 
 const LoginButton: React.FC = () => {
 

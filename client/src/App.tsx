@@ -8,6 +8,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <h1>OAuth example</h1>
       <LoginButton />
       <BigQueryButton />
     </div>

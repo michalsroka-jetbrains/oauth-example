@@ -2,7 +2,7 @@ import { appendFile } from "fs/promises";
 
 const AUDIT_LOG_PATH = process.env.AUDIT_LOG_PATH ?? "token-audit.jsonl";
 
-export type TokenEvent = "issued" | "refreshed" | "revoked";
+export type TokenEvent = "issued" | "refreshed" | "revoked" | "rejected";
 
 /**
  * Appends one line per token event to the audit log: the time, the event and the account's email.
